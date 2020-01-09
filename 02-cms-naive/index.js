@@ -4,6 +4,7 @@ import { createClient } from 'service-mocker/client';
 const client = createClient(scriptURL);
 
 const mainEl = document.getElementById('main');
+const editorEl = document.getElementById('editor');
 const saveButtonEl = document.getElementById('save');
 const getButtonEl = document.getElementById('get');
 
