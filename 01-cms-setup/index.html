@@ -15,6 +15,8 @@
         padding: 0;
         background: black;
         color: lime;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
       }
       #controls {
         display: flex;
@@ -34,6 +36,7 @@
       }
       #main {
         display: flex;
+        flex-direction: column;
         padding: 1rem;
       }
       #editor,
@@ -44,8 +47,14 @@
         background: #444;
         color: white;
       }
-      #preview {
-        margin-left: 1rem;
+      #comments {
+        border: 1px solid white;
+      }
+      .comment {
+        padding-left: 1rem;
+      }
+      .comment + .comment {
+        border-top: 1px solid white;
       }
       #status {
         position: sticky;
@@ -61,7 +70,8 @@
       }
       #title {
         margin: 1rem 1rem 0;
-        width: 25%;
+        width: 600px;
+        width: -moz-fit-content;
         animation: marquee 8s linear infinite alternate;
       }
       @keyframes marquee {
@@ -75,23 +85,25 @@
     </style>
   </head>
   <body>
-    <h1 id="title">Welcome to Awesome CMS</h1>
-
-    <header id="controls">
-      <button id="save">Save to server</button>
-      <button id="reset">Restart server</button>
-      <button id="refresh">Re-render</button>
+    <header>
+      <h1 id="title">~ Welcome to My Awesome Website ~</h1>
     </header>
-
     <main id="main">
+      <h2>Guestbook</h2>
+      <div id="comments"></div>
+      <hr />
+      <p>Please sign guestbook here!</p>
       <textarea
         id="editor"
         autocomplete="off"
         spellcheck="false"
         rows="15"
-        cols="30"
       ></textarea>
-      <div id="preview"></div>
+      <header id="controls">
+        <button id="save">Save to server</button>
+        <button id="reset">Restart server</button>
+        <button id="refresh">Re-render</button>
+      </header>
     </main>
 
     <footer id="status"></footer>

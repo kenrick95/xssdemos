@@ -3,14 +3,12 @@ import { createClient } from 'service-mocker/client';
 
 const client = createClient(scriptURL);
 
-const previewEl = document.getElementById('preview');
+const commentsEl = document.getElementById('comments');
 const editorEl = document.getElementById('editor');
 
 const saveButtonEl = document.getElementById('save');
 const refreshButtonEl = document.getElementById('refresh');
 const resetButtonEl = document.getElementById('reset');
-
-const statusEl = document.getElementById('status');
 
 const fetchHeaders = {
   Accept: 'application/json',
@@ -36,8 +34,7 @@ async function postData() {
     method: 'POST',
     headers: fetchHeaders,
     body: JSON.stringify({
-      data: editorEl.value,
-      timestamp: Date.now()
+      comment: editorEl.value
     })
   });
 
@@ -57,18 +54,20 @@ async function fetchData() {
   console.log('[fetchData] data', data);
   return data;
 }
+async function renderComments(comments) {
+  commentsEl.innerHTML = comments
+    .map((comment) => {
+      return `<div class="comment">${comment}</div>`;
+    })
+    .join('\n');
+}
 async function refreshPreview() {
-  statusEl.textContent = 'Re-rendering...';
   const data = await fetchData();
-  statusEl.textContent = 'Re-rendered!';
-  previewEl.innerHTML = data;
+  renderComments(data.comments);
 }
 async function init() {
-  statusEl.textContent = 'Initializing editor and preview';
   const data = await fetchData();
-  editorEl.value = data;
-  previewEl.innerHTML = data;
-  statusEl.textContent = 'Editor and preview initialized!';
+  renderComments(data.comments);
 }
 document.addEventListener('DOMContentLoaded', init);
 refreshButtonEl.addEventListener('click', refreshPreview);
