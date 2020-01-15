@@ -78,21 +78,21 @@ router.get('/data', async (req, res) => {
 router.post('/data', async (req, res) => {
   const currentData = await getDataFromCache();
   const body = await req.json();
+  try {
+    const newData = currentData.concat([
+      {
+        text: body.comment,
+        timestamp: Math.round(Date.now() / 1000)
+      }
+    ]);
 
-  cache.put(
-    MOCK_SAVE_ENDPOINT,
-    new Response(
-      JSON.stringify(
-        currentData.concat([
-          {
-            text: body.comment,
-            timestamp: Math.round(Date.now() / 1000)
-          }
-        ])
-      )
-    )
-  );
-  res.send('ok');
+    const cache = await caches.open(CACHE_NAME);
+    cache.put(MOCK_SAVE_ENDPOINT, new Response(JSON.stringify(newData)));
+    res.send('ok');
+  } catch (e) {
+    console.error('[sw][post] ', e);
+    res.send('boo');
+  }
 });
 
 router.delete('/data', async (req, res) => {
