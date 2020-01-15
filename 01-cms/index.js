@@ -16,7 +16,6 @@ const fetchHeaders = {
 };
 
 async function deleteData() {
-  statusEl.textContent = 'Restarting server...';
   await client.read;
 
   const response = await fetch('/data', {
@@ -24,11 +23,9 @@ async function deleteData() {
     headers: fetchHeaders
   });
   console.log('[deleteData]', await response.text());
-  statusEl.textContent = 'Server restarted!';
 }
 
 async function postData() {
-  statusEl.textContent = 'Saving...';
   await client.read;
   const response = await fetch('/data', {
     method: 'POST',
@@ -39,7 +36,6 @@ async function postData() {
   });
 
   console.log('[postData]', await response.text());
-  statusEl.textContent = 'Saved!';
 }
 async function fetchRenderred() {
   await client.ready;

@@ -7,13 +7,11 @@ const MODES = {
 const MODE =
   process.env.NODE_ENV === 'development' ? MODES.DEVELOPMENT : MODES.PRODUCTION;
 const STORIES = [
-  './01-cms-setup/',
-  './02-cms-naive/',
-  './03-cms-noscript/',
-  './04-cms-on/',
-  './05-cms-css/',
-  './06-cms-ref/',
-  './07-cms-click/'
+  './01-cms/',
+  './02-cms-on/',
+  './03-cms-ref/',
+  './04-cms-click/',
+  './05-cms-css/'
 ];
 const STORY_INDEX = parseInt(process.env.NUMBER, 10) || 1;
 const STORY = STORIES[STORY_INDEX - 1];
