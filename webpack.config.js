@@ -11,7 +11,7 @@ const STORIES = [
   './02-cms-on/',
   './03-ref/',
   './04-cms-click/',
-  './05-cms-css/'
+  './05-css/'
 ];
 const STORY_INDEX = parseInt(process.env.NUMBER, 10) || 1;
 const STORY = STORIES[STORY_INDEX - 1];

