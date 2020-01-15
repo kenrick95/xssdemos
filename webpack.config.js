@@ -9,7 +9,7 @@ const MODE =
 const STORIES = [
   './01-cms/',
   './02-cms-on/',
-  './03-cms-ref/',
+  './03-ref/',
   './04-cms-click/',
   './05-cms-css/'
 ];

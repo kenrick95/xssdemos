@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: black;
+  color: lime;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+a {
+  color: limegreen;
+}
+#title {
+  margin: 1rem 1rem 0;
+  width: 600px;
+  width: -moz-fit-content;
+  animation: marquee 8s linear infinite alternate;
+}
+@keyframes marquee {
+  0% {
+    transform: translateX(75%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
