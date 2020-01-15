@@ -41,33 +41,25 @@ async function postData() {
   console.log('[postData]', await response.text());
   statusEl.textContent = 'Saved!';
 }
-async function fetchData() {
+async function fetchRenderred() {
   await client.ready;
-  const response = await fetch('/data', {
+  const response = await fetch('/renderred', {
     headers: fetchHeaders
   });
-  const { data, error } = await response.json();
-  if (error) {
-    console.error('[fetchData] error', error);
-    return;
+  if (response.ok) {
+    const { renderred } = await response.json();
+    return renderred;
   }
-  console.log('[fetchData] data', data);
-  return data;
+  return 'Error';
 }
-async function renderComments(comments) {
-  commentsEl.innerHTML = comments
-    .map((comment) => {
-      return `<div class="comment">${comment}</div>`;
-    })
-    .join('\n');
+async function fetchAndRender() {
+  commentsEl.innerHTML = await fetchRenderred();
 }
 async function refreshPreview() {
-  const data = await fetchData();
-  renderComments(data.comments);
+  fetchAndRender();
 }
 async function init() {
-  const data = await fetchData();
-  renderComments(data.comments);
+  fetchAndRender();
 }
 document.addEventListener('DOMContentLoaded', init);
 refreshButtonEl.addEventListener('click', refreshPreview);

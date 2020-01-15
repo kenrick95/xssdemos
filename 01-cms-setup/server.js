@@ -5,7 +5,8 @@ const CACHE_NAME = 'ONE';
 const MOCK_SAVE_ENDPOINT = '/42';
 
 const initialData = [
-  `
+  {
+    text: `
 <p>
   Hello from Nigeria
 </p>
@@ -15,7 +16,10 @@ const initialData = [
 <p>
   Please send me e-mail: prince@nigeria.gov.ng
 </p>`,
-  `
+    timestamp: 1571095939
+  },
+  {
+    text: `
 <p>
   Can you see an image?
 </p>
@@ -23,11 +27,16 @@ const initialData = [
   <img src="https://picsum.photos/id/237/200/300">
 </p>
 `,
-  `
+    timestamp: 1572095939
+  },
+  {
+    text: `
 <p>
   Yes I can see your image!
 </p>
-`
+`,
+    timestamp: 1578095939
+  }
 ];
 
 async function getDataFromCache() {
@@ -39,6 +48,23 @@ async function getDataFromCache() {
     return await result.json();
   }
 }
+
+router.get('/renderred', async (req, res) => {
+  const currentData = await getDataFromCache();
+  const comments = initialData.concat(currentData);
+  const renderred = comments
+    .map((comment) => {
+      return `<div class="comment"><div class="text">${
+        comment.text
+      }</div><div class="datetime">${new Date(
+        comment.timestamp * 1000
+      ).toLocaleString()}</div></div>`;
+    })
+    .join('\n');
+  res.json({
+    renderred
+  });
+});
 
 router.get('/data', async (req, res) => {
   const currentData = await getDataFromCache();
@@ -55,7 +81,16 @@ router.post('/data', async (req, res) => {
 
   cache.put(
     MOCK_SAVE_ENDPOINT,
-    new Response(JSON.stringify(currentData.concat(body.comment)))
+    new Response(
+      JSON.stringify(
+        currentData.concat([
+          {
+            text: body.comment,
+            timestamp: Math.round(Date.now() / 1000)
+          }
+        ])
+      )
+    )
   );
   res.send('ok');
 });
