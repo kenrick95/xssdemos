@@ -1,6 +1,7 @@
 import { createServer } from 'service-mocker/server';
 const { router } = createServer();
 
+// TODO: Rewrite into root's server.js
 const CACHE_NAME = 'ONE';
 const MOCK_SAVE_ENDPOINT = '/42';
 
