@@ -1,63 +1,11 @@
-import scriptURL from 'sw-loader!./server.js';
-import { createClient } from 'service-mocker/client';
-
-const client = createClient(scriptURL);
-
-const commentsEl = document.getElementById('comments');
-const editorEl = document.getElementById('editor');
-
-const saveButtonEl = document.getElementById('save');
-const refreshButtonEl = document.getElementById('refresh');
-const resetButtonEl = document.getElementById('reset');
-
-const fetchHeaders = {
-  Accept: 'application/json',
-  'Content-Type': 'application/json'
-};
-
+const resetButtonEl = document.getElementById('reset')
 async function deleteData() {
-  await client.read;
-
-  const response = await fetch('/data', {
-    method: 'DELETE',
-    headers: fetchHeaders
-  });
-  console.log('[deleteData]', await response.text());
-}
-
-async function postData() {
-  await client.read;
-  const response = await fetch('/data', {
-    method: 'POST',
-    headers: fetchHeaders,
-    body: JSON.stringify({
-      comment: editorEl.value
-    })
-  });
-
-  console.log('[postData]', await response.text());
-}
-async function fetchRenderred() {
-  await client.ready;
-  const response = await fetch('/renderred', {
-    headers: fetchHeaders
-  });
+  const response = await fetch('./', {
+    method: 'DELETE'
+  })
+  console.log('[deleteData]', await response.text())
   if (response.ok) {
-    const { renderred } = await response.json();
-    return renderred;
+    location.reload()
   }
-  return 'Error';
 }
-async function fetchAndRender() {
-  commentsEl.innerHTML = await fetchRenderred();
-}
-async function refreshPreview() {
-  fetchAndRender();
-}
-async function init() {
-  fetchAndRender();
-}
-document.addEventListener('DOMContentLoaded', init);
-refreshButtonEl.addEventListener('click', refreshPreview);
-saveButtonEl.addEventListener('click', postData);
-resetButtonEl.addEventListener('click', deleteData);
+resetButtonEl.addEventListener('click', deleteData)

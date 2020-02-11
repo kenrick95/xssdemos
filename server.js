@@ -15,7 +15,14 @@ app.use(bodyParser.json({ type: 'application/*+json' }))
 app.use(bodyParser.text({ type: 'application/font-woff2' }))
 app.use(bodyParser.text({ type: 'application/font-woff' }))
 app.use(bodyParser.text({ type: 'text/html' }))
+app.use(
+  bodyParser.urlencoded({
+    type: 'application/x-www-form-urlencoded',
+    extended: false
+  })
+)
 
+//#region Database
 const KvDb = (pathToFile, initialData) => {
   if (!fs.existsSync(pathToFile)) {
     fs.writeFileSync(pathToFile, JSON.stringify(initialData), 'utf8')
@@ -36,7 +43,7 @@ const KvDb = (pathToFile, initialData) => {
     }
   }
 }
-const db = KvDb(path.join(__dirname, 'db.json'), {
+const initialData = {
   cms: {
     comments: [
       {
@@ -73,20 +80,17 @@ const db = KvDb(path.join(__dirname, 'db.json'), {
       }
     ]
   }
-})
-const template = fs.readFileSync(
-  path.join(__dirname, './01-cms/index.html'),
-  'utf8'
-)
+}
+const db = KvDb(path.join(__dirname, 'db.json'), initialData)
+//#endregion
 
-app.use('/01-cms', (req, res, next) => {
-  if (req.originalUrl === '/01-cms') {
-    res.redirect(302, '/01-cms/')
-  } else {
-    next()
-  }
-})
-app.get('/01-cms/', async (req, res) => {
+// #region 01-cms
+
+async function renderTemplate(req, res) {
+  const template = fs.readFileSync(
+    path.join(__dirname, './01-cms/index.html'),
+    'utf8'
+  )
   const cms = await db.get('cms')
   const renderred = cms.comments
     .map(comment => {
@@ -101,8 +105,37 @@ app.get('/01-cms/', async (req, res) => {
     return renderred
   })
   res.send(body)
+}
+app.get('/01-cms/', renderTemplate)
+app.post('/01-cms/', async (req, res) => {
+  console.log('hahaha', req.body)
+  const cms = await db.get('cms')
+  cms.comments = cms.comments.concat([
+    {
+      text: req.body.comment,
+      timestamp: Math.round(Date.now() / 1000)
+    }
+  ])
+
+  await db.set('cms', cms)
+  res.statusCode = 201
+  await renderTemplate(req, res)
+})
+app.delete('/01-cms/', async (req, res) => {
+  await db.set('cms', initialData.cms)
+  res.sendStatus(200)
+})
+
+app.use('/01-cms', (req, res, next) => {
+  if (req.originalUrl === '/01-cms') {
+    res.redirect(302, '/01-cms/')
+  } else {
+    next()
+  }
 })
 app.use('/01-cms', express.static('01-cms', { index: false }))
+
+// #endregion
 
 app.use('/02-ref', express.static('02-ref'))
 

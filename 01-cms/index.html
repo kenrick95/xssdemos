@@ -15,22 +15,24 @@
       <h2>Guestbook</h2>
       <div id="comments">{{comments}}</div>
       <hr />
-      <p>Please sign guestbook here!</p>
-      <textarea
-        id="editor"
-        autocomplete="off"
-        spellcheck="false"
-        rows="15"
-      ></textarea>
-      <header id="controls">
-        <button id="save">Save to server</button>
-        <button id="reset">Restart server</button>
-        <button id="refresh">Re-render</button>
-      </header>
+      <form action="" method="POST">
+        <p>Please sign guestbook here!</p>
+        <textarea
+          id="editor"
+          autocomplete="off"
+          spellcheck="false"
+          name="comment"
+          rows="15"
+        ></textarea>
+        <header id="controls">
+          <button id="save" type="submit">Save to server</button>
+          <button id="reset" type="button">Reset server data</button>
+        </header>
+      </form>
     </main>
 
     <footer id="status"></footer>
 
-    <script src="./main.js" type="module"></script>
+    <script src="./index.js" type="module"></script>
   </body>
 </html>
