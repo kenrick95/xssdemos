@@ -23,12 +23,14 @@ app.use(
 )
 
 //#region Database
-const KvDb = (pathToFile, initialData) => {
+const KvDb = (pathToFile, pathToInitialData) => {
   if (!fs.existsSync(pathToFile)) {
-    fs.writeFileSync(pathToFile, JSON.stringify(initialData), 'utf8')
+    fs.copyFileSync(pathToInitialData, pathToFile)
   }
-
   return {
+    reset: async () => {
+      fs.copyFileSync(pathToInitialData, pathToFile)
+    },
     get: async key => {
       const content = await readFile(pathToFile, 'utf8')
       const parsed = JSON.parse(content)
@@ -43,45 +45,10 @@ const KvDb = (pathToFile, initialData) => {
     }
   }
 }
-const initialData = {
-  cms: {
-    comments: [
-      {
-        text: `
-  <p>
-    Hello from Nigeria
-  </p>
-  <p>
-    Hello there, I'm a Nigerian prince. I would like to offer you $1,000,000! 
-  </p>
-  <p>
-    Please send me e-mail: prince@nigeria.gov.ng
-  </p>`,
-        timestamp: 1571095939
-      },
-      {
-        text: `
-  <p>
-    Can you see an image?
-  </p>
-  <p>
-    <img src="https://picsum.photos/id/237/200/300">
-  </p>
-  `,
-        timestamp: 1572095939
-      },
-      {
-        text: `
-  <p>
-    Yes I can see your image!
-  </p>
-  `,
-        timestamp: 1578095939
-      }
-    ]
-  }
-}
-const db = KvDb(path.join(__dirname, 'db.json'), initialData)
+const db = KvDb(
+  path.join(__dirname, 'db.json'),
+  path.join(__dirname, 'db.initial.json')
+)
 //#endregion
 
 // #region 01-cms
@@ -107,8 +74,8 @@ async function renderTemplate(req, res) {
   res.send(body)
 }
 app.get('/01-cms/', renderTemplate)
-app.post('/01-cms/', async (req, res) => {
-  console.log('hahaha', req.body)
+app.post('/01-cms/save', async (req, res) => {
+  console.log('[cms][save]', req.body)
   const cms = await db.get('cms')
   cms.comments = cms.comments.concat([
     {
@@ -118,11 +85,10 @@ app.post('/01-cms/', async (req, res) => {
   ])
 
   await db.set('cms', cms)
-  res.statusCode = 201
-  await renderTemplate(req, res)
+  res.redirect('/01-cms/')
 })
-app.delete('/01-cms/', async (req, res) => {
-  await db.set('cms', initialData.cms)
+app.delete('/01-cms/delete', async (req, res) => {
+  await db.reset()
   res.sendStatus(200)
 })
 

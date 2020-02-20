@@ -18,12 +18,14 @@ body {
 }
 #controls > button {
   flex: 0 1 auto;
+}
+button {
   background: #444;
   border: 1px solid lime;
   color: greenyellow;
   padding: 5px 10px;
 }
-#controls > button:hover {
+button:hover {
   background: #888;
   cursor: pointer;
 }
@@ -63,19 +65,28 @@ body {
   position: sticky;
   bottom: 0;
   margin: 0 1rem;
-  height: 3rem;
+  height: 4rem;
   background: black;
   border-top: 1px solid white;
   color: white;
 }
-#counter {
-  max-width: var(--max-content-width);
+#footer-content {
   margin: 0 auto;
-  padding: 1rem;
-  line-height: 1rem;
+  max-width: var(--max-content-width);
+  display: flex;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  align-items: baseline;
+}
+#counter {
+  flex: 0 1 auto;
 }
 #counter::before {
-  content: "Visitor count: "
+  content: 'Visitor count: ';
+}
+#reset {
+  flex: 0 1 auto;
+  margin-left: auto;
 }
 #title {
   margin: 1rem 1rem 0;
@@ -85,7 +96,7 @@ body {
 }
 @keyframes marquee {
   0% {
-    transform: translateX(75%);
+    transform: translateX(calc(100vw - 630px));
   }
   100% {
     transform: translateX(0%);

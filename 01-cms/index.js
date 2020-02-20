@@ -1,7 +1,7 @@
 const resetButtonEl = document.getElementById('reset')
 const visitorCountEl = document.getElementById('counter')
 async function deleteData() {
-  const response = await fetch('./', {
+  const response = await fetch('./delete', {
     method: 'DELETE'
   })
   console.log('[deleteData]', await response.text())

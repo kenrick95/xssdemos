@@ -15,7 +15,7 @@
       <h2>Guestbook</h2>
       <div id="comments">{{comments}}</div>
       <hr />
-      <form action="" method="POST">
+      <form action="/01-cms/save" method="POST">
         <h3>Please sign guestbook here!</h3>
         <textarea
           id="editor"
@@ -26,13 +26,16 @@
         ></textarea>
         <header id="controls">
           <button id="save" type="submit">Save to server</button>
-          <button id="reset" type="button">Reset server data</button>
         </header>
       </form>
     </main>
 
     <footer id="footer">
-      <div id="counter"></div>
+      <div id="footer-content">
+        <div id="counter"></div>
+
+        <button id="reset" type="button">Reset server data</button>
+      </div>
     </footer>
 
     <script src="./index.js" type="module"></script>
