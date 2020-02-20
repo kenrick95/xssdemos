@@ -150,6 +150,17 @@ app.get('/font-logger', (req, res) => {
   res.sendStatus(404)
 })
 
+app.get('/', (req, res) => {
+  const list = ['/01-cms/', '/02-ref/', '/03-css/']
+  res.send(
+    `<ul>${list
+      .map(item => {
+        return `<li><a href="${item}">${item}</a></li>`
+      })
+      .join('')}</ul>`
+  )
+})
+
 app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}`)
 })
